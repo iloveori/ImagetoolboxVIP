@@ -5,7 +5,7 @@ import qimage2ndarray
 import numpy as np
 
 
-def EdgeDetction(image):
+def Edge_Detection(image):
     image_arr = qimage2ndarray.rgb_view(image)
 
     #Grayscale

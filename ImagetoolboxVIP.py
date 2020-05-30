@@ -359,7 +359,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #황승언
             else :
-                qPixmapVar3=funcSeungeon.EdgeDetction(self.image_left)
+                qPixmapVar3=funcSeungeon.Edge_Detection(self.image_left)
                 pass
             #황승언
 
