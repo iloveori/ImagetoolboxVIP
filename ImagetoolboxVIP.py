@@ -338,7 +338,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #손정현
             elif num == 6:
-                pass
+                qPixmapVar3 = funcJunghyun.EdgeDetection(self.image_left)
             #손정현
 
 
