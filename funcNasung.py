@@ -82,7 +82,7 @@ def zerocrossing(lap_arr):
 
 def hough(image_arr, zero_arr):
 
-    kThreshHoldLine=110 #직선을 찾기 위한 임곗값으로, 직선을 구성하는 점의 최소한 voting개수
+    kThreshHoldLine=100 #직선을 찾기 위한 임곗값으로, 직선을 구성하는 점의 최소한 voting개수
     dims=zero_arr.shape 
     n=dims[0]; m=dims[1] # n*m배열 
                    
@@ -127,7 +127,7 @@ def hough(image_arr, zero_arr):
     image_arr=image_arr.astype(np.uint8)
 
     for i in range(len(angle_list)):
-        print("angle",angle_list[i])
+       
         a=np.cos(angle_list[i]*(np.pi / 180))
         b=np.sin(angle_list[i]*(np.pi / 180))
         x0=a*rho_list[i]
@@ -180,7 +180,7 @@ def corner(gaus_arr):
     ixiy=np.copy(gaus_arr)
 
     print(ix1.shape, iy1.shape)
-    for i in range(5):
+    for i in range(10):
         gaus_arr=Gaussian_filter(gaus_arr) #가우시안 필터 적용 
 
     #소벨 연산 (1차 미분 )
@@ -191,35 +191,11 @@ def corner(gaus_arr):
             
             ix[i][j]=ix_ #수직미분
             iy[i][j]=iy_ #수평미분 
-    
-    # ix2=[0,]
-    # iy2=[0,]
-    # ixiy=[0,]
-
-    # detM=np.copy(gaus_arr)
-    # traceM=np.copy(gaus_arr)
-    # R=np.copy(gaus_arr)
 
     ix=np.round_(ix,3)
     iy=np.round_(iy,3)
 
     print("ix iy",ix, iy)
-
-    # return (ix+iy)
-    # for i in range(1,n-1):
-    #     for j in range(1,m-1):
-    #         ix2[i][j]+=(ix[i][j] ** 2)
-    #         iy2[i][j]+=(iy[i][j] ** 2)
-    #         ixiy[i][j]+=(ix[i][j]*iy[i][j])
-    # ix2=np.square(ix) #ix의 제곱값
-    # iy2=np.square(iy)
-    
-    # ix2=ix**2
-    # iy2=iy**2
-    # ixiy=ix*iy
-    # ix2=np.round_(ix2,3)
-    # iy2=np.round_(iy2,3)
-    # ixiy=np.round_(ixiy,3)
 
      #3*3 마스크 (sum)
     for i in range(1,n-1):
@@ -239,69 +215,34 @@ def corner(gaus_arr):
     detM = (ix2 * iy2) - (ixiy ** 2) #det M
     traceM = (ix2 + iy2) #trance(M)
     print("detM",detM)
-    #detM=np.round_(detM,3)
-    # traceM=np.round_(traceM,3)
-
-    # for i in range(1,n-1):
-    #     for j in range(1,m-1):
-    #         detM[i][j] += (ix2[i][j] * iy2[i][j]) - (ixiy[i][j] ** 2) #det M
-    #         traceM[i][j] += (ix2[i][j] + iy2[i][j]) #trance(M)
     
     print("detM",detM)
     print("traceM",traceM)
     k=0.04 #k값은 보통 0.04로 함 
 
     R = detM - (k* (traceM ** 2)) #현재 윈도우의 R값 𝑅 = det 𝑀 − 𝑘(𝑡𝑟𝑎𝑐𝑒(𝑀))2
-    # R=np.round_(R,3)
 
     corners = []
     print("R",R)
 
-    for i in range(1, n-1):
-        for j in range(1, m-1):
-            # if R[i][j] >= max(R[i-1][j-1], R[i][j-1], R[i+1][j-1], R[i-1][j+1], R[i][j+1], R[i+1][j+1], R[i-1][j], R[i+1][j]): #센터값이 전체보다 더 클 경우  
-            if(R[i][j]>0): #임곗값 
+    for i in range(1, n-2):
+        for j in range(1, m-2):
+             
+            if(R[i][j]>31274321): #임곗값 
                 corners.append((i, j, R[i][j])) #2개 고유값이이 둘다 클 경우, 코너점임
-    
-    print("corners",corners)
-    # for i in range(1, R.shape[0] - 1):
-    #     for j in range(1, R.shape[1] - 1):
-    #         if R[i][j] >= max(R[i-1][j-1], R[i][j-1], R[i+1][j-1], R[i-1][j+1], R[i][j+1], R[i+1][j+1], R[i-1][j], R[i+1][j]): #센터값이 전체보다 더 클 경우 
-    #             R[i][j]=round(R[i][j],5) #소수점 5째자리까지만 
-    #             if(R[i][j]>(0)): #임곗값 
-    #                 corners.append((i, j, R[i][j])) #2개 고유값이이 둘다 클 경우, 코너점임 
+    print(len(corners))
+    print("corners {}",format(corners))
     
     return corners
-
-    # dims=gaus_arr.shape
-    # n=dims[0]; m=dims[1]
-    # cor_arr=np.copy(gaus_arr)
-    # corners_2=[]
-    # for i in range(1,n-1):
-    #     for j in range(1,m-1):
-    #         lap=gaus_arr[i-1][j-1]+gaus_arr[i][j-1]+gaus_arr[i+1][j-1]+gaus_arr[i-1][j]+gaus_arr[i][j]*(-8)+gaus_arr[i+1][j]+gaus_arr[i-1][j+1]+gaus_arr[i][j+1]+gaus_arr[i+1][j+1]            
-    #         if(lap>=max(gaus_arr[i-1][j-1], gaus_arr[i][j-1], gaus_arr[i+1][j-1], gaus_arr[i-1][j+1], gaus_arr[i][j+1], gaus_arr[i+1][j+1], gaus_arr[i-1][j], gaus_arr[i+1][j])):  
-    #             corners_2.append((i,j))
-    
-    # corners_3=[]
-    # dims=gaus_arr.shape
-    # n=dims[0]; m=dims[1]
-    # cor2_arr=np.copy(gaus_arr)
-    # for i in range(n):
-    #     for j in range(m):
-    #         cor2_arr[i][j]=0
-    
-    # for i in range(1,n-1):
-    #     for j in range(1,m-1):
-            
-    #         if(cor2_arr[i][j]>=max(gaus_arr[i-1][j-1], gaus_arr[i][j-1], gaus_arr[i+1][j-1], gaus_arr[i-1][j+1], gaus_arr[i][j+1], gaus_arr[i+1][j+1], gaus_arr[i-1][j], gaus_arr[i+1][j])):  
-    #             corners_3.append((i,j))
 
 def corner_image(image_arr, corners):
     x = [corner[0] for corner in corners]
     y = [corner[1] for corner in corners]
+    print("len(x)",len(x))
+    print("x",x)
+    print("y",y)
 
-    for i in range(1,len(x)-1):
+    for i in range(0,len(x)):
             image_arr[int(x[i])][int(y[i])]=(0,255,0)
     
     return image_arr
@@ -426,8 +367,8 @@ def HoughTransform(image):
     gray_arr=Gray_scale(image_arr) #그레이 스케일
     gray_arr=padding(gray_arr) #패딩
     gaus_arr=Gaussian_filter(gray_arr) #가우시안 필터
-    # for i in range(10):
-    #     gaus_arr=Gaussian_filter(gaus_arr) #가우시안 필터
+    for i in range(10):
+        gaus_arr=Gaussian_filter(gaus_arr) #가우시안 필터
     lap_arr=Laplacian(gaus_arr) #라플라시안 필터 엣지검출함
     zero_arr = zerocrossing(lap_arr) 
     hou_arr=hough(image_arr, zero_arr)  #허프 변환
