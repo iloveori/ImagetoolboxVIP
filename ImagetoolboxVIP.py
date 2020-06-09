@@ -139,7 +139,6 @@ class WindowClass(QMainWindow, basic_ui) :
             
             #권나성
             if num == 1:
-                qPixmapVar3=funcNasung.Harris_CornerDetection(self.image_left)
                 pass
             #권나성
 
@@ -222,7 +221,6 @@ class WindowClass(QMainWindow, basic_ui) :
             
             #권나성
             if num == 1:
-                qPixmapVar3=funcNasung.HoughTransform(self.image_left)
                 pass
             #권나성
 
@@ -325,7 +323,6 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #김나현
             elif num == 4:
-                qPixmapVar3 = funcNahyun.EdgeDetection(self.image_left)
                 pass
             #김나현
 
@@ -362,7 +359,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #황승언
             else :
-                qPixmapVar3=funcSeungeon.Preprocessing(self.image_left)
+                qPixmapVar3=funcSeungeon.Edge_Detection(self.image_left)
                 pass
             #황승언
 
