@@ -182,6 +182,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #이성호
             elif num == 8:
+                qPixmapVar3=funcSungho.Corner(self.image_left)
                 pass
             #이성호
 
@@ -350,6 +351,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #이성호
             elif num == 8:
+                qPixmapVar3=funcSungho.Edge_detect(self.image_left)
                 pass
             #이성호
 
