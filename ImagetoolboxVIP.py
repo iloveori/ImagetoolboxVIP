@@ -158,6 +158,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #김나현
             elif num == 4:
+                qPixmapVar3=funcNahyun.CornerDetection(self.image_left)
                 pass
             #김나현
 
@@ -241,6 +242,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #김나현
             elif num == 4:
+                qPixmapVar3 = funcNahyun.Hough(self.image_left)
                 pass
             #김나현
 
