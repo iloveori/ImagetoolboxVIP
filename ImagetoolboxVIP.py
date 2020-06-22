@@ -347,6 +347,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #이로사
             elif num == 7:
+                QPixmapVar3=funcRosa.edge_detection(self.image_left)
                 pass
             #이로사
 
