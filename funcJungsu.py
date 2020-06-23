@@ -66,7 +66,6 @@ def cornerdetection (image):
 
     for y in range(offset, height-offset):
         for x in range(offset, width-offset):
-            #왜 하필 0.04일까?
             if R[y,x]>0.4:
                 #해당 픽셀에 채널값을 준다.픽셀값 설정.
                 image_array.itemset((y,x,0),0)
