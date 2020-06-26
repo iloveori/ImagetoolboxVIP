@@ -14,7 +14,7 @@ def Edge_Detection(image):
     result = np.dot(image_arr, gray_arr)
 
 
-    for i in range(1,20):
+    for i in range(1,10):
         #Padding
         image_pad = np.pad(result, 2, mode='constant', constant_values=0)
     
@@ -42,7 +42,6 @@ def Edge_Detection(image):
 
     #Padding
     image_pad = np.pad(result, 2, mode='constant', constant_values=0)
-
 
     #Laplacian Filtering
     kenel = np.array([[0,0,1,0,0],
@@ -91,6 +90,7 @@ def SGN(x):
     else:
         sign=0
     return sign
+
 
 def Corner_Detection(image):
     image_arr = qimage2ndarray.rgb_view(image)
@@ -163,4 +163,5 @@ def Corner_Detection(image):
 
     
     
+
 

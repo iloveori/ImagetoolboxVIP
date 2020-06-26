@@ -157,6 +157,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #김나현
             elif num == 4:
+                qPixmapVar3=funcNahyun.CornerDetection(self.image_left)
                 pass
             #김나현
 
@@ -181,12 +182,14 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #이성호
             elif num == 8:
+                qPixmapVar3=funcSungho.Corner(self.image_left)
                 pass
             #이성호
 
 
             #한정수
             elif num == 9:
+                qPixmapVar3 = funcJungsu.cornerdetection(self.image_left)
                 pass
             #한정수
 
@@ -240,6 +243,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #김나현
             elif num == 4:
+                qPixmapVar3 = funcNahyun.Hough(self.image_left)
                 pass
             #김나현
 
@@ -336,18 +340,20 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #손정현
             elif num == 6:
-                pass
+                qPixmapVar3 = funcJunghyun.EdgeDetection(self.image_left)
             #손정현
 
 
             #이로사
             elif num == 7:
+                QPixmapVar3=funcRosa.edge_detection(self.image_left)
                 pass
             #이로사
 
 
             #이성호
             elif num == 8:
+                qPixmapVar3=funcSungho.Edge_detect(self.image_left)
                 pass
             #이성호
 
