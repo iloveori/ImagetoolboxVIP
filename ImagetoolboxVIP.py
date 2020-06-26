@@ -190,6 +190,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #한정수
             elif num == 9:
+                qPixmapVar3 = funcJungsu.cornerdetection(self.image_left)
                 pass
             #한정수
 
