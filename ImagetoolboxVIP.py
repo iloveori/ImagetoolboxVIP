@@ -322,6 +322,7 @@ class WindowClass(QMainWindow, basic_ui) :
 
             #금빛나
             elif num == 3:
+                qPixmapVar3 = funcBitna.edge_detection(self.image_left)
                 pass
             #금빛나
 
